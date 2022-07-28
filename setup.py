@@ -15,11 +15,11 @@ setup(name='metaembedding',
       packages=find_packages(),
       python_requires='>=3.7',
       install_requires=[
-          'matplotlib',
-          'numpy',
-          'sentence_transformers',
-          'tensorflow.keras',
-          'tensorflow_probability'
-      ],
+          'matplotlib']
+          #'numpy',
+          #'sentence_transformers',
+          #'tensorflow.keras',
+          #'tensorflow_probability'
+      #],
       include_package_data=True,
       zip_safe=False)
