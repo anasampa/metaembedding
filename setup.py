@@ -16,7 +16,8 @@ setup(name='meta',
           'tqdm >= 4.29.1',
           'scikit-learn>=0.18',
           'scikit-image>=0.12',
-          'pyDOE2==1.3.0'
+          'pyDOE2==1.3.0',
+          'sentence_transformers'
       ],
       extras_require={
           'dev': ['pytest', 'flake8'],
