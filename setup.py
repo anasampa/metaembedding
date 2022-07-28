@@ -15,7 +15,7 @@ setup(name='metaembedding',
       packages=find_packages(),
       python_requires='>=3.7',
       install_requires=[
-          'matplotlib']
+          'matplotlib'],
           #'numpy',
           #'sentence_transformers',
           #'tensorflow.keras',
