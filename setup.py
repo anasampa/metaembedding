@@ -1,14 +1,19 @@
 from setuptools import setup, find_packages
 
+VERSION = 0.0.1
+DESCRIPTION = "Metaembedding tool."
+LONG_DESCRIPTION = "A tool to combine and visualize embedding combinations for similarity prediction."
 setup(name='metaembedding',
-      version='0.1',
-      description='Combine embeddings',
+      version=VERSION,
+      description=DESCRIPTION,
+      long_description = LONG_DESCRIPTION,
       url='http://github.com/anasampa/metaembedding',
       author='Ana',
       author_email='ana.sampa.oi@gmail.com',
       license='--',
       #packages=find_packages(exclude=['js', 'node_modules', 'tests']),
       python_requires='>=3.5',
+      packages = find_packages()
       install_requires=[
           'matplotlib',
           'numpy',
