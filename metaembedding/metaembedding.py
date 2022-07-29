@@ -8,10 +8,11 @@ from tensorflow.keras.callbacks import EarlyStopping
 import tensorflow_probability as tfp
 import numpy as np
 
+
 class MetaEmbedding():
 
   def __init__(self,embedding_models,vectorizer=False,fusion_dim=512):
-    
+
     self.emb_models = embedding_models
     if not vectorizer:
       vectorizer = self.get_embedding

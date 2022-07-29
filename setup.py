@@ -19,6 +19,7 @@ setup(name='meta',
           'pyDOE2==1.3.0',
           'sentence_transformers'
       ],
+      dependency_links=['https://github.com/anasampa/lime/archive/vector_emb.zip'],
       extras_require={
           'dev': ['pytest', 'flake8'],
       },
