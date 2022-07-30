@@ -17,15 +17,15 @@ class LimeExplain():
     self.explainer = LimeTextExplainer(mode='regression')
     self.model_predictor = model_predictor
 
-  def explain_instance(self,pair,num_features=10,num_samples=4):
+  def explain_instance(self,pair,num_features=40,num_samples=60):
     self.explanation = self.explainer.explain_instance(pair,num_features=num_features,num_samples=num_samples,classifier_fn=self.model_predictor,multiple_texts=True)
     return self.explanation
 
-  def explain_as_list(self,pair,num_features=10,num_samples=4):
+  def explain_as_list(self,pair,num_features=40,num_samples=60):
     # Shortcut
     return self.explain_instance(pair,num_features=num_features,num_samples=num_samples).as_list()
 
-  def explain_in_notebook(self,pair,num_features=10,num_samples=4):
+  def explain_in_notebook(self,pair,num_features=40,num_samples=60):
     return self.explain_instance(pair,num_features=num_features,num_samples=num_samples).show_in_notebook()
 
 
