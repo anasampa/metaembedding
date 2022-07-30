@@ -9,9 +9,33 @@ import tensorflow_probability as tfp
 import numpy as np
 from lime.lime_text import LimeTextExplainer
 
+
+class LimeExplain():
+
+  def __init__(self,model_predictor):
+    # Lime setup specific for metaembedding predictor.
+    self.explainer = LimeTextExplainer(mode='regression')
+    self.model_predictor = model_predictor
+
+  def explain_instance(self,pair,num_features=10,num_samples=4):
+    self.explanation = self.explainer.explain_instance(pair,num_features=num_features,num_samples=num_samples,classifier_fn=self.model_predictor,multiple_texts=True)
+    return self.explanation
+
+  def explain_as_list(self,pair,num_features=10,num_samples=4):
+    # Shortcut
+    return self.explain_instance(pair,num_features=num_features,num_samples=num_samples).as_list()
+
+  def explain_in_notebook(self,pair,num_features=10,num_samples=4):
+    return self.explain_instance(pair,num_features=num_features,num_samples=num_samples).show_in_notebook()
+
+
 class MetaEmbedding():
 
   def __init__(self,embedding_models,vectorizer=False,fusion_dim=512):
+
+    #super().__init__()
+    #self.explainer = False
+    self.lime = LimeExplain(self.predict_model)
 
     self.emb_models = embedding_models
     if not vectorizer:
@@ -35,7 +59,7 @@ class MetaEmbedding():
       self.inputs.append(inp2)
       print(model_name, text1_emb.shape[1])
 
-      ci =multiply([inp1,inp2])
+      ci = multiply([inp1,inp2])
 
       merge_i = Dense(fusion_dim,activation='linear')(ci)
       merges.append(merge_i) #guardando todos os modelos
@@ -50,9 +74,13 @@ class MetaEmbedding():
 
     self.output_meta = Dense(1,activation='linear')(operation_layer)
 
+    #Model.__init__(self,self.inputs,self.output_meta)
     model = Model(inputs=self.inputs, outputs=self.output_meta)
     model.compile(optimizer='adam', loss='mse', metrics=['mse', 'mae',self.tf_pearson])
     self.model = model
+
+ #def get_config(self):
+    #return {"inputs": self.inputs,"outputs_meta":self.output_meta}
 
   def fit(self):
     return self.model.fit()
@@ -79,8 +107,6 @@ class MetaEmbedding():
     data_s1 = list(zip(*pairs))[0]
     data_s2 = list(zip(*pairs))[1]
 
-    #print(model_name)
-
     vectorizer = SentenceTransformer(model_name)
     s1_vector = vectorizer.encode(data_s1)
     s2_vector = vectorizer.encode(data_s2)
@@ -103,7 +129,7 @@ class MetaEmbedding():
 
     return X_train_emb
 
-  def val_run(self, X_train,Y_train, x_val=False, y_val=False, epoch=1, shuffle=True):
+  def train_run(self, X_train,Y_train, x_val=False, y_val=False, epoch=1, shuffle=True):
 
     if not x_val:
       X_train, x_val, Y_train, y_val = train_test_split(X_train, Y_train, test_size=0.15, shuffle=True)
@@ -112,19 +138,8 @@ class MetaEmbedding():
     x_val_emb = self.get_models_emb(x_val)
 
     callback = EarlyStopping(monitor='loss', patience=2)
-    #model_save = ModelCheckpoint(name_weights, save_best_only=True, monitor='val_loss', mode='min') # colocar no callbacks quando quiser salvar
     self.model.fit(x_train_emb, Y_train, epochs=2, shuffle=shuffle,validation_data=(x_val_emb, y_val),callbacks=[callback])
     return self.model
-
-  def train_run(self, X_train,Y_train, epoch=1, shuffle=True):
-
-    x_train_emb = self.get_models_emb(X_train)
-
-    callback = EarlyStopping(monitor='loss', patience=2)
-    #model_save = ModelCheckpoint(name_weights, save_best_only=True, monitor='val_loss', mode='min') # colocar no callbacks quando quiser salvar
-    self.model.fit(x_train_emb, Y_train, epochs=2, shuffle=shuffle,callbacks=[callback])
-    return self.model
-
 
   def predict_model(self,X_test):
     X_test_emb = list()
