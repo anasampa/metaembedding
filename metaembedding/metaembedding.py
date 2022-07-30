@@ -33,17 +33,14 @@ class MetaEmbedding():
 
   def __init__(self,embedding_models,vectorizer=False,fusion_dim=512):
 
-    #super().__init__()
-    #self.explainer = False
     self.lime = LimeExplain(self.predict_model)
-
     self.emb_models = embedding_models
+    self.pairs_example = [['This is an example','This is an accepted input format.']]
+
+    # Option for custumize vectorization
     if not vectorizer:
       vectorizer = self.get_embedding
 
-    self.pairs_example = [['This is an example','This is an accepted input format.']]
-
-    #def make_model(self):
     merges = list()
     self.inputs = list()
     sents_X_train = list()
@@ -53,7 +50,7 @@ class MetaEmbedding():
 
       text1_emb, text2_emb = self.get_embedding(model_name,self.pairs_example[:1])
 
-      inp1 = Input(shape=(text1_emb.shape[1])) # tamanho da embedding
+      inp1 = Input(shape=(text1_emb.shape[1])) # size of embedding
       inp2 = Input(shape=(text2_emb.shape[1]))
       self.inputs.append(inp1)
       self.inputs.append(inp2)
@@ -62,7 +59,7 @@ class MetaEmbedding():
       ci = multiply([inp1,inp2])
 
       merge_i = Dense(fusion_dim,activation='linear')(ci)
-      merges.append(merge_i) #guardando todos os modelos
+      merges.append(merge_i)
 
     # Layers
     merge_layer = concatenate(merges)
@@ -74,13 +71,9 @@ class MetaEmbedding():
 
     self.output_meta = Dense(1,activation='linear')(operation_layer)
 
-    #Model.__init__(self,self.inputs,self.output_meta)
     model = Model(inputs=self.inputs, outputs=self.output_meta)
     model.compile(optimizer='adam', loss='mse', metrics=['mse', 'mae',self.tf_pearson])
     self.model = model
-
- #def get_config(self):
-    #return {"inputs": self.inputs,"outputs_meta":self.output_meta}
 
   def fit(self):
     return self.model.fit()
