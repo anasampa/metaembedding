@@ -18,9 +18,8 @@ setup(name='meta',
           'scikit-image>=0.12',
           'pyDOE2==1.3.0',
           'sentence_transformers',
-          'vector_emb'
+          'lime @ https://github.com/anasampa/lime/archive/vector_emb.zip'
       ],
-      dependency_links=['https://github.com/anasampa/lime/archive/vector_emb.zip'],
       extras_require={
           'dev': ['pytest', 'flake8'],
       },
