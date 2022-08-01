@@ -124,6 +124,8 @@ class MetaEmbedding():
 
   def train_run(self, X_train,Y_train, x_val=False, y_val=False, epochs=1, shuffle=True):
 
+    callback = EarlyStopping(monitor='loss', patience=2)
+
     if x_val is False and y_val is False:
       self.model.fit(X_train, Y_train, epochs=epochs, shuffle=shuffle,callbacks=[callback])
     elif x_val is not False and y_val is not False:
@@ -131,7 +133,6 @@ class MetaEmbedding():
       x_train_emb = self.get_models_emb(X_train)
       x_val_emb = self.get_models_emb(x_val)
 
-      callback = EarlyStopping(monitor='loss', patience=2)
       self.model.fit(x_train_emb, Y_train, epochs=epochs, shuffle=shuffle,validation_data=(x_val_emb, y_val),callbacks=[callback])
     else:
         raise TypeError("Validation input error. Missing x_val or y_val.")
