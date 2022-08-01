@@ -132,7 +132,7 @@ class MetaEmbedding():
       x_val_emb = self.get_models_emb(x_val)
 
       callback = EarlyStopping(monitor='loss', patience=2)
-      self.model.fit(x_train_emb, Y_train, epochs=, shuffle=shuffle,validation_data=(x_val_emb, y_val),callbacks=[callback])
+      self.model.fit(x_train_emb, Y_train, epochs=epochs, shuffle=shuffle,validation_data=(x_val_emb, y_val),callbacks=[callback])
     else:
         raise TypeError("Validation input error. Missing x_val or y_val.")
     return self.model
