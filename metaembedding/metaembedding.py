@@ -69,7 +69,7 @@ class MetaEmbedding():
 
     operation_layer = multiply([meta_embedding_layer_sentence1,meta_embedding_layer_sentence2])
 
-    self.output_meta = Dense(1,activation='softmax')(operation_layer)
+    self.output_meta = Dense(1,activation='sigmoid')(operation_layer)
 
     model = Model(inputs=self.inputs, outputs=self.output_meta)
     model.compile(optimizer='adam', loss='mse', metrics=['mse', 'mae',self.tf_pearson])
