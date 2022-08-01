@@ -128,8 +128,9 @@ class MetaEmbedding():
     x_train_emb = self.get_models_emb(X_train)
 
     if x_val is False and y_val is False:
-      self.model.fit(X_train, Y_train, epochs=epochs, shuffle=shuffle,callbacks=[callback])
+      self.model.fit(x_train_emb, Y_train, epochs=epochs, shuffle=shuffle,callbacks=[callback])
     elif x_val is not False and y_val is not False:
+      x_val_emb = self.get_models_emb(x_val)
       #X_train, x_val, Y_train, y_val = train_test_split(X_train, Y_train, test_size=0.15, shuffle=True)
       self.model.fit(x_train_emb, Y_train, epochs=epochs, shuffle=shuffle,validation_data=(x_val_emb, y_val),callbacks=[callback])
     else:
