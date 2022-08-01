@@ -37,7 +37,7 @@ class MetaEmbedding():
     self.emb_models = embedding_models
     self.pairs_example = [['This is an example','This is an accepted input format.']]
 
-    # Option for custumize vectorization
+    # Option for custumize vectorization (future)
     if not vectorizer:
       vectorizer = self.get_embedding
 
@@ -69,7 +69,7 @@ class MetaEmbedding():
 
     operation_layer = multiply([meta_embedding_layer_sentence1,meta_embedding_layer_sentence2])
 
-    self.output_meta = Dense(1,activation='linear')(operation_layer)
+    self.output_meta = Dense(1,activation='softmax')(operation_layer)
 
     model = Model(inputs=self.inputs, outputs=self.output_meta)
     model.compile(optimizer='adam', loss='mse', metrics=['mse', 'mae',self.tf_pearson])
@@ -100,7 +100,7 @@ class MetaEmbedding():
     data_s1 = list(zip(*pairs))[0]
     data_s2 = list(zip(*pairs))[1]
 
-    vectorizer = SentenceTransformer(model_name)
+    vectorizer = SentenceTransformer(model_name) # Defaut
     s1_vector = vectorizer.encode(data_s1)
     s2_vector = vectorizer.encode(data_s2)
 
