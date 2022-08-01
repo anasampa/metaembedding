@@ -131,8 +131,6 @@ class MetaEmbedding():
       self.model.fit(X_train, Y_train, epochs=epochs, shuffle=shuffle,callbacks=[callback])
     elif x_val is not False and y_val is not False:
       #X_train, x_val, Y_train, y_val = train_test_split(X_train, Y_train, test_size=0.15, shuffle=True)
-      x_val_emb = self.get_models_emb(x_val)
-
       self.model.fit(x_train_emb, Y_train, epochs=epochs, shuffle=shuffle,validation_data=(x_val_emb, y_val),callbacks=[callback])
     else:
         raise TypeError("Validation input error. Missing x_val or y_val.")
