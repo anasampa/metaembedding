@@ -17,7 +17,7 @@ class LimeExplain():
     self.explainer = LimeTextExplainer(mode='regression')
     self.model_predictor = model_predictor
 
-  def explain_instance(self,pair,num_features=40,num_samples=60):
+  def explain_instance(self,pair,num_features=40,num_samples=60,distance_metric='cosine'):
     self.explanation = self.explainer.explain_instance(pair,num_features=num_features,num_samples=num_samples,classifier_fn=self.model_predictor,multiple_texts=True)
     return self.explanation
 
