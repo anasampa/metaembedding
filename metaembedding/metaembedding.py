@@ -33,7 +33,7 @@ class Transformer():
         LEARNING_RATE = learning_rate
         EPOCH = epochs
 
-        t = text.Transformer(MODEL_NAME, maxlen=128)
+        t = text.Transformer(self.MODEL_NAME, maxlen=128)
         trn = t.preprocess_train(x_train, y_train)
         model = t.get_classifier()
         learner = ktrain.get_learner(model, train_data=trn, batch_size=BATCH_SIZE) # lower bs if OOM occurs
@@ -48,7 +48,7 @@ class Transformer():
         LEARNING_RATE = learning_rate
         EPOCH = epochs
 
-        t = text.Transformer(MODEL_NAME, maxlen=128)
+        t = text.Transformer(self.MODEL_NAME, maxlen=128)
         trn = t.preprocess_train(x_train, y_train)
         val = t.preprocess_test(x_val, y_val)
         model = t.get_classifier()
