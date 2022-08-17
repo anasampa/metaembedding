@@ -13,7 +13,7 @@ from ktrain import text
 
 
 class Transformer():
-    def __init__(model_name):
+    def __init__(self,model_name):
 
         models = {bert_base_cased:'bert-base-multilingual-cased',
         bert_pt_base_cased: 'neuralmind/bert-base-portuguese-cased',
@@ -27,7 +27,7 @@ class Transformer():
             except:
                 raise TypeError('Not recognized model. Please pick a valid model name. See https://huggingface.co/models for more models options.')
 
-    def train(x_train, y_train,batch_size=32,learning_rate=5e-5,epochs=2):
+    def train(self,x_train, y_train,batch_size=32,learning_rate=5e-5,epochs=2):
 
         BATCH_SIZE = batch_size
         LEARNING_RATE = learning_rate
@@ -42,7 +42,7 @@ class Transformer():
         predictor = ktrain.get_predictor(learner.model, t)
         return predictor
 
-    def val(x_train, y_train, x_val, y_val,batch_size=32,learning_rate=5e-5,epochs=2):
+    def val(self,x_train, y_train, x_val, y_val,batch_size=32,learning_rate=5e-5,epochs=2):
 
         BATCH_SIZE = batch_size
         LEARNING_RATE = learning_rate
