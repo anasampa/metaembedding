@@ -13,7 +13,7 @@ from ktrain import text
 
 
 class Transformer():
-    def __init__(model_name)
+    def __init__(model_name):
 
         models = {bert_base_cased:'bert-base-multilingual-cased',
         bert_pt_base_cased: 'neuralmind/bert-base-portuguese-cased',
