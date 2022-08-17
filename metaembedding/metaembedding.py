@@ -28,10 +28,7 @@ class Transformer():
                 raise TypeError('Not recognized model. Please pick a valid model name. Some examples are ', str(list(models.keys()),
                 '.See https://huggingface.co/models for more models options.')
 
-    def train(x_train, y_train,
-            batch_size = 32,
-            learning_rate = 5e-5,
-            epochs = 2):
+    def train(x_train, y_train,batch_size=32,learning_rate=5e-5,epochs=2):
 
         BATCH_SIZE = batch_size
         LEARNING_RATE = learning_rate
@@ -46,10 +43,7 @@ class Transformer():
         predictor = ktrain.get_predictor(learner.model, t)
         return predictor
 
-    def val(x_train, y_train, x_val, y_val,
-            batch_size = 32,
-            learning_rate = 5e-5,
-            epochs = 2):
+    def val(x_train, y_train, x_val, y_val,batch_size=32,learning_rate=5e-5,epochs=2):
 
         BATCH_SIZE = batch_size
         LEARNING_RATE = learning_rate
