@@ -25,8 +25,7 @@ class Transformer():
             try:
                 self.MODEL_NAME = models[model_name]
             except:
-                raise TypeError('Not recognized model. Please pick a valid model name. Some examples are ', str(list(models.keys()),
-                '.See https://huggingface.co/models for more models options.')
+                raise TypeError('Not recognized model. Please pick a valid model name. See https://huggingface.co/models for more models options.')
 
     def train(x_train, y_train,batch_size=32,learning_rate=5e-5,epochs=2):
 
