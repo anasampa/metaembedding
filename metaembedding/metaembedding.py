@@ -15,9 +15,9 @@ from ktrain import text
 class Transformer():
     def __init__(self,model_name):
 
-        models = {bert_base_cased:'bert-base-multilingual-cased',
-        bert_pt_base_cased: 'neuralmind/bert-base-portuguese-cased',
-        bert_pt_large_cased:'neuralmind/bert-large-portuguese-cased'}
+        models = {'bert_base_cased':'bert-base-multilingual-cased',
+        'bert_pt_base_cased':'neuralmind/bert-base-portuguese-cased',
+        'bert_pt_large_cased':'neuralmind/bert-large-portuguese-cased'}
 
         if model_name in models.values():
             self.MODEL_NAME = model_name
