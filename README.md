@@ -23,7 +23,7 @@ model3 = 'distiluse-base-multilingual-cased-v1'
 embedding_models = [model1, model2, model3]
 ```
 
-### 1.3 Metaembedding model
+### 1.3 Build the metaembedding model
 ```
 model = MetaEmbedding(embedding_models)
 model.summary()
