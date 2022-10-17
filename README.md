@@ -33,10 +33,15 @@ model.train_run(X_train,Y_train, epochs=2)
 
 ### 1.5 Predict
 ```
-model.predict_model([['Eu comi banana','Eu comi abacate']])
+model.predict_model([['I am a sentence','I am another sentence']])
 ```
 
-### 1.5 Load saved weights from trained model 
+### 1.5 Save weights from trained model
+```
+model.save_weights('name_of_file')
+```
+
+### 1.6 Load saved weights from trained model 
 
 ```
 weight = 'name_of_file'
@@ -52,11 +57,15 @@ Original lime: https://github.com/marcotcr/lime
 
 ### 2.1 Show explanation in notebook
 ```
-model.lime.explain_in_notebook(pair,num_features=50,num_samples=60)
+s1 = 'I am a sentence'
+s2 = 'I am another sentence'
+pair = [s1,s2]
+
+model.lime.explain_in_notebook(pair,num_features=30,num_samples=50)
 ```
 
 ### 2.2 Access values as a list
 ```
-model.lime.explain_as_list(pair,num_features=25,num_samples=50)
+model.lime.explain_as_list(pair,num_features=30,num_samples=50)
 ```
 
