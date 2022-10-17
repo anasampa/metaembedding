@@ -12,6 +12,9 @@ from metaembedding.metaembedding import MetaEmbedding
 
 
 ### 1.2 Choose pre-trained models 
+
+List of possible models: https://www.sbert.net/docs/pretrained_models.html
+
 ```
 model1 = 'paraphrase-multilingual-mpnet-base-v2' 
 model2 = 'paraphrase-multilingual-MiniLM-L12-v2' 
