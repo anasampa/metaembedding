@@ -54,7 +54,7 @@ model = MetaEmbedding(embedding_models)
 model.load_weights(weight)
 ```
 
-## 2. Explain model using LIME
+## 2. Explain the prediction of intances using LIME
 
 Original lime: https://github.com/marcotcr/lime
 
