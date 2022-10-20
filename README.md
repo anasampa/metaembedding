@@ -66,6 +66,7 @@ pair = [s1,s2]
 
 model.lime.explain_in_notebook(pair,num_features=30,num_samples=50)
 ```
+ps: The token [SEP] is diplayed to indicate sentence separation. It is not computed in the predictions of the model.  
 
 ### 2.2 Access values as a list
 ```
