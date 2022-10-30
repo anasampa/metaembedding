@@ -8,6 +8,55 @@ from tensorflow.keras.callbacks import EarlyStopping
 import tensorflow_probability as tfp
 import numpy as np
 from lime.lime_text import LimeTextExplainer
+import ktrain
+from ktrain import text
+
+
+class Transformer():
+    def __init__(self,model_name):
+
+        models = {'bert_base_cased':'bert-base-multilingual-cased',
+        'bert_pt_base_cased':'neuralmind/bert-base-portuguese-cased',
+        'bert_pt_large_cased':'neuralmind/bert-large-portuguese-cased'}
+
+        if model_name in models.values():
+            self.MODEL_NAME = model_name
+        else:
+            try:
+                self.MODEL_NAME = models[model_name]
+            except:
+                raise TypeError('Not recognized model. Please pick a valid model name. See https://huggingface.co/models for more models options.')
+
+    def train(self,x_train, y_train,batch_size=32,learning_rate=5e-5,epochs=2):
+
+        BATCH_SIZE = batch_size
+        LEARNING_RATE = learning_rate
+        EPOCH = epochs
+
+        t = text.Transformer(self.MODEL_NAME, maxlen=128)
+        trn = t.preprocess_train(x_train, y_train)
+        model = t.get_classifier()
+        learner = ktrain.get_learner(model, train_data=trn, batch_size=BATCH_SIZE) # lower bs if OOM occurs
+        learner.fit_onecycle(LEARNING_RATE, EPOCH)
+
+        predictor = ktrain.get_predictor(learner.model, t)
+        return predictor
+
+    def val(self,x_train, y_train, x_val, y_val,batch_size=32,learning_rate=5e-5,epochs=2):
+
+        BATCH_SIZE = batch_size
+        LEARNING_RATE = learning_rate
+        EPOCH = epochs
+
+        t = text.Transformer(self.MODEL_NAME, maxlen=128)
+        trn = t.preprocess_train(x_train, y_train)
+        val = t.preprocess_test(x_val, y_val)
+        model = t.get_classifier()
+        learner = ktrain.get_learner(model, train_data=trn, val_data=val, batch_size=BATCH_SIZE) # lower bs if OOM occurs
+        learner.fit_onecycle(LEARNING_RATE, 5)
+
+        predictor = ktrain.get_predictor(learner.model, t)
+        return predictor
 
 
 class LimeExplain():
