@@ -18,7 +18,8 @@ setup(name='meta',
           'scikit-image>=0.12',
           'pyDOE2==1.3.0',
           'sentence_transformers',
-          'lime @ https://github.com/anasampa/lime/archive/vector_emb.zip',
+          #'lime @ https://github.com/anasampa/lime/archive/vector_emb.zip',
+          'lime @ https://github.com/anasampa/metaembedding/archive/master.zip',  
           'ktrain'
       ],
       extras_require={
