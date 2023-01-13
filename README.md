@@ -1,5 +1,7 @@
 # Metaembedding
 
+Sentence similarity prediction tool based on the combination of pre-trained Transformers based models.
+
 ### Install
 !pip install https://github.com/anasampa/metaembedding/archive/plusmetatool.zip
 
