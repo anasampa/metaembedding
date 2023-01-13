@@ -75,3 +75,14 @@ ps: The token [SEP] is diplayed to indicate sentence separation. It is not compu
 model.lime.explain_as_list(pair,num_features=30,num_samples=50)
 ```
 
+## Cite
+
+@inproceedings{rodrigues2022sentence,
+  title={Sentence Similarity Recognition in Portuguese from Multiple Embedding Models},
+  author={Rodrigues, Ana Carolina and Marcacini, Ricardo M.},
+  booktitle={2022 21th IEEE international conference on machine learning and applications (ICMLA)},
+  pages={154--159},
+  year={2022},
+  organization={IEEE}
+}
+
