@@ -58,7 +58,13 @@ model.load_weights(weight)
 
 ## 2. Explain the prediction of intances using LIME
 
-Original lime: https://github.com/marcotcr/lime
+Generally, similarity tasks in Natural Language Processing is a regression multi-text task.   
+The original LIME text module is only for classification tasks with single text inputs, which prevents its direct use for similarity comparison. 
+We extended the original LIME to apply it in models that take multiple texts as inputs, such as pairs of sentences, and also for accepting regression models with text entrances. 
+
+More about the sentence similarity task and this LIME extension can be found in the "Sentence Similarity Recognition in Portuguese from Multiple Embedding Models" (citation at the end of the readme).
+
+Original LIME (without the extension): https://github.com/marcotcr/lime
 
 ### 2.1 Show explanation in notebook
 ```
